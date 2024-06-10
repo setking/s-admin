@@ -1,0 +1,117 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "typeRoots": [
+      "node_modules/@types", // 默认值
+      "src/types"
+    ],
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
+    "paths": {
+      "~assets/*": [
+        "src/assets/*"
+      ],
+      "~components/*": [
+        "src/components/*"
+      ],
+      "~layouts/*": [
+        "src/layouts/*"
+      ],
+      "~request/*": [
+        "src/request/*"
+      ],
+      "~router/*": [
+        "src/router/*"
+      ],
+      "~shared/*": [
+        "src/shared/*"
+      ],
+      "~store/*": [
+        "src/store/*"
+      ],
+      "~views/*": [
+        "src/views/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "~types/*": [
+        "src/types/*"
+      ],
+      "~mock/*": [
+        "src/mock/*"
+      ],
+      "~sider/*": [
+        "src/layouts/sider/*"
+      ],
+      "~tags/*": [
+        "src/layouts/tags/*"
+      ],
+      "~headers/*": [
+        "src/layouts/headers/*"
+      ],
+      "~header/*": [
+        "src/layouts/header/*"
+      ],
+      "~footer/*": [
+        "src/layouts/footer/*"
+      ],
+      "~content/*": [
+        "src/layouts/content/*"
+      ],
+      "~tags copy/*": [
+        "src/layouts/tags copy/*"
+      ],
+      "~hooks/*": [
+        "src/hooks/*"
+      ],
+      "~permission/*": [
+        "src/views/permission/*"
+      ],
+      "~catch/*": [
+        "src/shared/catch/*"
+      ],
+      "~redirect/*": [
+        "src/views/redirect/*"
+      ],
+      "~parentView/*": [
+        "src/components/parentView/*"
+      ],
+      "~innerLink/*": [
+        "src/components/innerLink/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/*.d.ts",
+    "types/**/*.d.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
+}
