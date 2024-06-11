@@ -6,7 +6,7 @@ const dashboard = {
   redirect: "/dashboard/analysis",
   meta: {
     orderNo: 1,
-    icon: "ion:grid-outline",
+    icon: "Menu",
     title: "仪表盘",
   },
   children: [
@@ -16,18 +16,18 @@ const dashboard = {
       component: () => import("~views/dashboard/analysis/index.vue"),
       meta: {
         orderNo: 2,
-        title: "分析页",
+        title: "数据分析",
       },
     },
-    {
-      path: "work",
-      name: "Work",
-      component: () => import("~views/dashboard/work/index.vue"),
-      meta: {
-        orderNo: 3,
-        title: "工作台",
-      },
-    },
+    // {
+    //   path: "work",
+    //   name: "Work",
+    //   component: () => import("~views/dashboard/work/index.vue"),
+    //   meta: {
+    //     orderNo: 3,
+    //     title: "工作台",
+    //   },
+    // },
   ],
 };
 export default dashboard;

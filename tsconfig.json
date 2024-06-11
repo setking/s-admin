@@ -98,6 +98,15 @@
       ],
       "~innerLink/*": [
         "src/components/innerLink/*"
+      ],
+      "~menu/*": [
+        "src/views/menu/*"
+      ],
+      "~element/*": [
+        "src/views/element/*"
+      ],
+      "~SvgIcon/*": [
+        "src/components/SvgIcon/*"
       ]
     }
   },

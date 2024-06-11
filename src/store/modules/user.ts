@@ -6,11 +6,13 @@ import { store } from "~store/index";
 import type { LoginInfo, UserInfo } from "~types/store";
 import { usePermissionStoreWithOut } from "~store/modules/permission";
 import { RouteRecordRaw } from "vue-router";
-const permissionStore = usePermissionStoreWithOut();
 import { ApiLogin } from "~request/api/index.ts";
 import { getUserCache, setUserCache,clearUserCache } from "~shared/catch/user";
 import { CacheSetting } from "~shared/catch/cacheEnum";
 import { MODEL_NOT_FOUND } from "~router/model";
+import {useUserSettingWithOut} from  "./setting.ts"
+const userSettings = useUserSettingWithOut()
+const permissionStore = usePermissionStoreWithOut();
 interface UserState {
   token?: string;
   userInfo: Nullable<UserInfo>;
@@ -54,7 +56,7 @@ export const useUserStore = defineStore({
     async login(params: LoginInfo) {
       try {
         ApiLogin.login(params).then((res: any) => {
-          console.log("res: " + res.username);
+          console.log("username: " + res.username);
           ApiLogin.userInfo().then((res: any) => {
             this.setToken(res.token);
             ApiLogin.menuList().then((res: any) => {
@@ -76,6 +78,7 @@ export const useUserStore = defineStore({
         router.addRoute(MODEL_NOT_FOUND as unknown as RouteRecordRaw);
       }
       permissionStore.setDynamicRoutes(true);
+      userSettings.resetUse()
       router.replace(SettingEnum.BASE_HOME);
     },
   },

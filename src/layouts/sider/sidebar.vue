@@ -2,14 +2,13 @@
   <el-scrollbar class="theme-dark">
     <el-menu
       default-active="/dashboard/analysis"
-      class="el-menu-vertical-demo scroll-menu"
-      @open="handleOpen"
-      @close="handleClose"
       :unique-opened="true"
+      class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
       :router="true"
       active-text-color="#ffd04b"
+      :collapse="getCollapsed"
     >
       <SidebarItem
         v-for="(route, index) in menuList"
@@ -25,15 +24,10 @@ import { ElScrollbar, ElMenu } from "element-plus";
 import SidebarItem from "./sidebarItem.vue";
 import { asyncRoutes } from "~router/modules";
 import { useUserStore } from "~store/modules/user";
+import {useSetting} from "~hooks/useSetting.ts";
+const {getCollapsed} = useSetting()
 const useStore = useUserStore();
 const menuList = asyncRoutes.concat(useStore.getMenuList as unknown as []);
-console.log(menuList);
-const handleOpen = (e: any) => {
-  console.log(e);
-};
-const handleClose = (e: any) => {
-  console.log(e);
-};
 </script>
 <style lang="scss" scoped>
 ::v-deep .el-scrollbar__wrap {
@@ -42,6 +36,12 @@ const handleClose = (e: any) => {
   height: 100%;
   overflow-x: hidden !important;
   overflow-y: scroll;
+}
+::v-deep .el-menu{
+  border: none;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
 }
 ::-webkit-scrollbar {
   width: 6px;

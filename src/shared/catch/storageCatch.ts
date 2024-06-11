@@ -15,7 +15,6 @@ export const createStorage = ({ storage = sessionStorage, prefixKey = "" }) => {
         value,
         time: Date.now(),
       });
-      console.log("stringifyValue", JSON.parse(stringData).value);
       this.storage.setItem(this.getKey(key), stringData);
     }
     get(key: string) {

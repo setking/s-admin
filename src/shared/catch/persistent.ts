@@ -15,9 +15,9 @@ export const DEFAULT_CACHE_TIME = 60 * 60 * 24 * 7;
 
 type Nullable<T> = T | null;
 type LocalStore = BasicCache;
-type SessionStore = BasicCache;
+// type SessionStore = BasicCache;
 type LocalKeys = keyof LocalStore;
-type SessionKeys = keyof SessionStore;
+// type SessionKeys = keyof SessionStore;
 
 const lSet = createLocalStorage();
 const sSet = createSessionStorage();
@@ -45,7 +45,7 @@ export class Persistent {
   }
   static clearLocal(immediate: boolean = false): void {
     sessionCache.clear();
-    immediate && sSet.clear();
+    immediate && lSet.clear();
   }
 }
 

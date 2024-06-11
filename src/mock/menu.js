@@ -10,7 +10,7 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                 redirect: "/permission/web/page",
                 meta: {
                     orderNo: 4,
-                    icon: "ion:grid-outline",
+                    icon: "Key",
                     title: "权限配置",
                 },
                 children: [
@@ -65,7 +65,94 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                     },
 
                 ],
+            },
+            {
+                path: "/menu",
+                name: "Menu",
+                component: 'LAYOUT',
+                redirect: "/menu/menu1",
+                meta: {
+                    orderNo: 10,
+                    icon: "Coin",
+                    title: "多级菜单",
+                },
+                children: [
+                    {
+                        path: "menu1",
+                        name: "Menu1",
+                        component: 'menu/menu1',
+                        meta: {
+                            orderNo: 11,
+                            title: "菜单1",
+                        },
+
+                    },
+                    {
+                        path: "menu1",
+                        name: "menu1",
+                        component: 'ParentLayout',
+                        meta: {
+                            orderNo: 12,
+                            title: "菜单2",
+                        },
+                        children: [
+                            {
+                                path: "menu2",
+                                name: "Menu2",
+                                component: 'menu/menu1/menu2',
+                                meta: {
+                                    orderNo: 13,
+                                    title: "菜单2",
+                                },
+                            },
+                            {
+                                path: "menu2",
+                                name: "menu2",
+                                component: 'ParentLayout',
+                                meta: {
+                                    orderNo: 14,
+                                    title: "菜单3",
+                                },
+                                children: [
+                                    {
+                                        path: "menu3",
+                                        name: "Menu3",
+                                        component: 'menu/menu1/menu2/menu3',
+                                        meta: {
+                                            orderNo: 15,
+                                            title: "菜单3",
+                                        },
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+
+                ],
+            },
+            {
+                path: "/element",
+                name: "Element",
+                component: 'LAYOUT',
+                redirect: "/element/table",
+                meta: {
+                    orderNo: 16,
+                    icon: "List",
+                    title: "组件",
+                },
+                children: [
+                    {
+                        path: "table",
+                        name: "Table",
+                        component: "element/table",
+                        meta: {
+                            orderNo: 17,
+                            title: "表格"
+                        }
+                    }
+                ]
             }
         ],
+
     },
 });

@@ -8,12 +8,12 @@ export const REDIRECT_NAME = "Redirect";
 // 匹配views里面所有的.vue文件
 const modules = import.meta.glob("../views/**/*.vue");
 export const loadView = (view: any) => {
-  let res;
-  for (const path in modules) {
-    const dir = path.split("views/")[1].split("/index.vue")[0];
-    if (dir === view) {
-      res = () => modules[path]();
+    let res;
+    for (const path in modules) {
+        const dir = path.split("views/")[1].split("/index.vue")[0];
+        if (dir === view) {
+            res = () => modules[path]();
+        }
     }
-  }
-  return res;
+    return res;
 };
