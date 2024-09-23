@@ -71,8 +71,11 @@ export class Caches<T = any, V = any> {
   }
   clear() {
     Object.keys(this.cache).forEach((key) => {
-      const item = this.cache[key];
-      item.timeoutId && clearTimeout(item.timeoutId);
+      const K = key as any as keyof T;
+      const item = this.cache[K];
+      if (item && item.timeoutId) {
+        item.timeoutId && clearTimeout(item.timeoutId);
+      }
     });
     this.cache = {};
   }

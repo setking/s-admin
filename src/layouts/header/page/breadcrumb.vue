@@ -26,24 +26,24 @@ function isDashboard(route: any) {
 }
 const breadcrumbSet = (nex: any) => {
   matched.value = nex.matched.filter(
-      (item: any) => item.meta && item.meta.title
+    (item: any) => item.meta && item.meta.title
   );
   const first = matched.value[0];
 
   if (!isDashboard(first)) {
     matched.value = [{ path: "/index", meta: { title: "首页" } }].concat(
-        matched.value
+      matched.value
     );
   }
   levelList.value = matched.value.filter(
-      (item: any) =>
-          item.meta && item.meta.title && item.meta.breadcrumb !== false
+    (item: any) =>
+      item.meta && item.meta.title && item.meta.breadcrumb !== false
   );
 };
 breadcrumbSet(route);
 </script>
 <style lang="scss" scoped>
-.breadcrumb{
+.breadcrumb {
   margin-left: 10px;
   font-size: 16px !important;
 }

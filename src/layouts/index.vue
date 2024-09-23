@@ -5,16 +5,24 @@
     </div>
     <div class="container">
       <Header />
-      <Content />
-      <!-- <Footer /> -->
+      <Tags />
+      <Content :key="getRefreshKey"/>
+<!--       <Footer />-->
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import Header from "./header/index.vue";
+import Tags from "./tags/index.vue";
 import Content from "./content/index.vue";
-import Footer from "./footer/index.vue";
+// import Footer from "./footer/index.vue";
 import SideBar from "./sider/index.vue";
+import {useUserUseTagsView} from "~store/modules/tagsView.ts"
+import {storeToRefs} from "pinia";
+
+const useTagsView = useUserUseTagsView()
+const {getRefreshKey} = storeToRefs(useTagsView)
+console.log(getRefreshKey)
 </script>
 <style lang="scss" scoped>
 .active {

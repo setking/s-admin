@@ -10,11 +10,11 @@
 </template>
 <script lang="ts" setup>
 import {ElIcon} from "element-plus"
-import {computed, ref} from "vue";
+import {ref} from "vue";
 import {useUserSettingWithOut} from "~store/modules/setting.ts";
 
 const userSetting = useUserSettingWithOut()
-const isCollapsed = ref<Boolean>(false)
+const isCollapsed = ref<boolean>(false)
 isCollapsed.value = userSetting.getCollapse
 const isCollapse = () => {
   isCollapsed.value = !isCollapsed.value

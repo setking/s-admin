@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import type {
   ComponentRenderProxy,
   VNode,
@@ -18,3 +19,4 @@ declare global {
   };
   declare type Recordable<T = any> = Record<string, T>;
 }
+

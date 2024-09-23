@@ -10,17 +10,20 @@
       active-text-color="#ffd04b"
       :collapse="getCollapsed"
     >
+      <el-menu-item-group>
       <SidebarItem
         v-for="(route, index) in menuList"
         :key="route.path + index"
         :item="route"
         :base-path="route.path"
       />
+      </el-menu-item-group>
     </el-menu>
   </el-scrollbar>
+
 </template>
 <script lang="ts" setup>
-import { ElScrollbar, ElMenu } from "element-plus";
+import {ElScrollbar, ElMenu, ElMenuItemGroup} from "element-plus";
 import SidebarItem from "./sidebarItem.vue";
 import { asyncRoutes } from "~router/modules";
 import { useUserStore } from "~store/modules/user";

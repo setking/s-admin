@@ -1,37 +1,36 @@
 <template>
-  <el-menu-item-group>
+
     <template v-if="isMnuItem(item)">
       <el-menu-item class="menu-item" :index="resolvePath(item.children)">
-        <template #title
-        ><span>{{ item.meta.title }}</span></template
+        <template #title>
+          <el-icon v-if="item.meta.icon">
+            <Component :is="item.meta.icon" />
+          </el-icon>
+          <span>{{ item.meta.title }}</span></template
         >
       </el-menu-item>
     </template>
 
     <el-sub-menu v-if="isMenu(item)" :index="toStrings(item.meta.orderNo)">
-
       <template #title>
-        <el-icon>
-          <Component :is="item.meta.icon"/>
+        <el-icon v-if="item.meta.icon">
+          <Component :is="item.meta.icon" />
         </el-icon>
         <span>{{ item.meta.title }}</span>
       </template>
 
       <sidebar-item
-          v-for="(child, index) in item.children"
-          :key="child.path + index"
-          :item="child"
-          :base-path="resolvePath(child.path)"
-          class="nest-menu"
+        v-for="(child, index) in item.children"
+        :key="child.path + index"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+        class="nest-menu"
       />
     </el-sub-menu>
-  </el-menu-item-group>
-
 </template>
 <script lang="ts" setup>
-import {ElSubMenu, ElMenuItem, ElMenuItemGroup, ElIcon} from "element-plus";
-import {RouteRecordRaw} from "vue-router";
-import {toStrings} from "~shared/base";
+import { ElSubMenu, ElMenuItem, ElIcon } from "element-plus";
+import { toStrings } from "~shared/base";
 
 const props = defineProps({
   item: {
@@ -63,12 +62,11 @@ const isMnuItem = (children: SiberBarMenu | Record<string, any>) => {
     return true;
   }
 };
-const resolvePath = (path: string, routeQuery: any = {}) => {
+const resolvePath = (path: string) => {
   if (path) {
     return props.basePath + "/" + path;
   }
   return props.basePath;
 };
 </script>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

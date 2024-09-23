@@ -1,11 +1,13 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { ViteAliases } from "./node_modules/vite-aliases";
-// import {
-//   createStyleImportPlugin,
-//   ElementPlusResolve,
-// } from "vite-plugin-style-import";
-import VitePluginElementPlus from "vite-plugin-element-plus";
+import {
+  createStyleImportPlugin,
+  ElementPlusResolve,
+} from "vite-plugin-style-import";
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,22 +15,25 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       ViteAliases(),
-      VitePluginElementPlus({
-        format: mode === "development" ? "esm" : "cjs",
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
       }),
-      // createStyleImportPlugin({
-      //   resolves: [ElementPlusResolve()],
-      //   libs: [
-      //     {
-      //       libraryName: "element-plus",
-      //       esModule: true,
-      //       resolveStyle: (name) => {
-      //         return `element-plus/lib/theme-chalk/${name}.css`;
-      //       },
-      //       ensureStyleFile: true,
-      //     },
-      //   ],
-      // }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      createStyleImportPlugin({
+        resolves: [ElementPlusResolve()],
+        libs: [
+          {
+            libraryName: "element-plus",
+            esModule: true,
+            resolveStyle: (name) => {
+              return `element-plus/lib/theme-chalk/${name}.css`;
+            },
+            ensureStyleFile: true,
+          },
+        ],
+      }),
     ],
     resolve: {
       extensions: [".js", ".ts", ".json"],

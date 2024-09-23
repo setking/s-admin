@@ -9,8 +9,10 @@
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
+<script lang="ts" setup>
+import {ref} from "vue";
+
+defineProps({
   src: {
     type: String,
     default: "/",

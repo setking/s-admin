@@ -16,7 +16,8 @@ const dashboard = {
       component: () => import("~views/dashboard/analysis/index.vue"),
       meta: {
         orderNo: 2,
-        title: "数据分析",
+        title: "首页",
+        fixation: true
       },
     },
     // {

@@ -1,8 +1,10 @@
 <template>
   <div class="box">
-    <el-card class="box-card">
-      <login-form />
-    </el-card>
+    <div class="box-card">
+      <el-card>
+        <login-form />
+      </el-card>
+    </div>
   </div>
 </template>
 <script lang="ts" setup>
