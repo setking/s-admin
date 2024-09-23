@@ -110,6 +110,9 @@
       ],
       "~requestTool/*": [
         "src/shared/requestTool/*"
+      ],
+      "~form/*": [
+        "src/views/form/*"
       ]
     }
   },

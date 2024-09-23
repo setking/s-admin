@@ -1,4 +1,5 @@
 import Mock from 'mockjs';
+import {LAYOUT} from "~router/layout";
 export const menulist = Mock.mock('/api/menu', 'get', {
     code: 200,
     data: {
@@ -70,23 +71,13 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                 path: "/menu",
                 name: "Menu",
                 component: 'LAYOUT',
-                redirect: "/menu/menu1",
+                redirect: "menu/menu1/menu2/menu3",
                 meta: {
                     orderNo: 10,
                     icon: "Coin",
                     title: "多级菜单",
                 },
                 children: [
-                    {
-                        path: "menu1",
-                        name: "Menu1",
-                        component: 'menu/menu1',
-                        meta: {
-                            orderNo: 11,
-                            title: "菜单1",
-                        },
-
-                    },
                     {
                         path: "menu1",
                         name: "menu1",
@@ -96,15 +87,7 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                             title: "菜单2",
                         },
                         children: [
-                            {
-                                path: "menu2",
-                                name: "Menu2",
-                                component: 'menu/menu1/menu2',
-                                meta: {
-                                    orderNo: 13,
-                                    title: "菜单2",
-                                },
-                            },
+
                             {
                                 path: "menu2",
                                 name: "menu2",
@@ -115,13 +98,24 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                                 },
                                 children: [
                                     {
-                                        path: "menu3",
+                                        path: "",
                                         name: "Menu3",
-                                        component: 'menu/menu1/menu2/menu3',
+                                        component: 'ParentLayout',
                                         meta: {
                                             orderNo: 15,
                                             title: "菜单3",
                                         },
+                                        children: [
+                                            {
+                                                path: "menu4",
+                                                name: "Menu4",
+                                                component: 'menu/menu1/menu2/menu3',
+                                                meta: {
+                                                    orderNo: 13,
+                                                    title: "菜单2",
+                                                },
+                                            },
+                                        ]
                                     }
                                 ]
                             }
@@ -138,7 +132,7 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                 meta: {
                     orderNo: 16,
                     icon: "List",
-                    title: "组件",
+                    title: "表格",
                 },
                 children: [
                     {
@@ -151,7 +145,28 @@ export const menulist = Mock.mock('/api/menu', 'get', {
                         }
                     }
                 ]
-            }
+            },
+            {
+                path: "/form",
+                name: "Form",
+                component: 'LAYOUT',
+                redirect: "/form/formFix",
+                meta: {
+                    title: "表单",
+                    icon: "List",
+                },
+                children: [
+                    {
+                        path: "formFix",
+                        name: "Form",
+                        component: "form/formFix",
+                        meta: {
+                            orderNo: 18,
+                            title: "表单"
+                        }
+                    }
+                ]
+            },
         ],
 
     },

@@ -76,7 +76,7 @@ export const useTagsView = defineStore({
 
                 // 是左侧还是右侧 item.meta.noClosable固定留下的
                 this.tagsViewList = this.tagsViewList.filter((item, index) => {
-                    return index < range[0] || index >= range[1] || item.fixation
+                    return index < range[0] || index >= range[1] || item.meta.fixation
                 })
             }
         },
@@ -97,8 +97,6 @@ export const useTagsView = defineStore({
         updateTagsView() {
             const router = useRouter()
             let hasAnalysis: boolean = this.tagsViewList.some(item => item.name === "Analysis")
-            console.log('hasAnalysis', hasAnalysis)
-            console.log(this.tagsViewList)
             if (!hasAnalysis) {
                 let matched = router.getRoutes().find(route => route.name === "Analysis")
                 this.tagsViewList.unshift(matched)

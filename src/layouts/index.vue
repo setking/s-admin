@@ -22,7 +22,6 @@ import {storeToRefs} from "pinia";
 
 const useTagsView = useUserUseTagsView()
 const {getRefreshKey} = storeToRefs(useTagsView)
-console.log(getRefreshKey)
 </script>
 <style lang="scss" scoped>
 .active {

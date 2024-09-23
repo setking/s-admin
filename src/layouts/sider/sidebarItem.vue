@@ -1,37 +1,45 @@
 <template>
-
-    <template v-if="isMnuItem(item)">
-      <el-menu-item class="menu-item" :index="resolvePath(item.children)">
-        <template #title>
-          <el-icon v-if="item.meta.icon">
-            <Component :is="item.meta.icon" />
-          </el-icon>
-          <span>{{ item.meta.title }}</span></template
-        >
-      </el-menu-item>
+  <div v-if="!item.hidden">
+    <template
+        v-if="onlyItem(item, item.children) && (!onlyOneChild.children || onlyOneChild.oneChild)">
+      <app-link class="link-press" v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item class="menu-item" :index="resolvePath(onlyOneChild.path)">
+          <template #title>
+            <el-icon v-if="item.meta && item.meta.icon">
+              <Component :is="item.meta.icon"/>
+            </el-icon>
+            <span>{{ item.meta.title }}</span>
+          </template>
+        </el-menu-item>
+      </app-link>
     </template>
 
-    <el-sub-menu v-if="isMenu(item)" :index="toStrings(item.meta.orderNo)">
-      <template #title>
+    <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
+      <template v-if="item.meta" #title>
         <el-icon v-if="item.meta.icon">
-          <Component :is="item.meta.icon" />
+          <Component :is="item.meta.icon"/>
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <span v-if="item.meta">{{ item.meta ? item.meta.title : "" }}</span>
       </template>
 
       <sidebar-item
-        v-for="(child, index) in item.children"
-        :key="child.path + index"
-        :item="child"
-        :base-path="resolvePath(child.path)"
-        class="nest-menu"
+          v-for="(child, index) in item.children"
+          :key="child.path + index"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+          class="nest-menu"
       />
     </el-sub-menu>
+  </div>
+
 </template>
 <script lang="ts" setup>
-import { ElSubMenu, ElMenuItem, ElIcon } from "element-plus";
-import { toStrings } from "~shared/base";
+import {ElSubMenu, ElMenuItem, ElIcon} from "element-plus";
+import {ref} from "vue"
+import AppLink from "./Link.vue"
+import {getNormalPath} from "~shared/base.ts";
 
+const onlyOneChild = ref({});
 const props = defineProps({
   item: {
     type: Object,
@@ -52,16 +60,22 @@ interface SiberBarMenu {
   name: string;
 }
 
-const isMenu = (menu: SiberBarMenu | Record<string, any>) => {
-  if (menu.children && menu.children.length > 0) {
-    return true;
+function onlyItem(parent: any, children: any[]) {
+  if (!children) children = []
+  const hasChild = children.filter(item => {
+    onlyOneChild.value = item
+    return true
+  })
+  if (hasChild.length === 1) {
+    return true
   }
-};
-const isMnuItem = (children: SiberBarMenu | Record<string, any>) => {
-  if (!children.children || children.children.length === 0) {
-    return true;
+  if (hasChild.length === 0) {
+    onlyOneChild.value = {...parent, path: '', oneChild: true}
+    return true
   }
-};
+  return false
+}
+
 const resolvePath = (path: string) => {
   if (path) {
     return props.basePath + "/" + path;
@@ -69,4 +83,8 @@ const resolvePath = (path: string) => {
   return props.basePath;
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.link-press {
+  text-decoration: none;
+}
+</style>

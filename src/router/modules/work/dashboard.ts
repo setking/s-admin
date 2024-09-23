@@ -20,15 +20,7 @@ const dashboard = {
         fixation: true
       },
     },
-    // {
-    //   path: "work",
-    //   name: "Work",
-    //   component: () => import("~views/dashboard/work/index.vue"),
-    //   meta: {
-    //     orderNo: 3,
-    //     title: "工作台",
-    //   },
-    // },
+
   ],
 };
 export default dashboard;
