@@ -52,7 +52,7 @@ const contextmenuParams = ref({
   left: 0,
   top: 0,
 })
-useTagsView.updateTagsView()
+
 watch(
     () => route.fullPath,
     () => {
@@ -129,6 +129,7 @@ const openMenuList = ref<{ icon: string; name: string }[]>([
   },
 ])
 const openMenu = ({x, y}: MouseEvent, fullPath: string) => {
+  if (fullPath === "/dashboard/analysis") return
   contextmenuParams.value = {
     left: x, // X轴
     top: y, // Y轴
@@ -136,6 +137,7 @@ const openMenu = ({x, y}: MouseEvent, fullPath: string) => {
   visible.value = true //打开菜单
   currentPath.value = fullPath // 路径存起
 }
+useTagsView.updateTagsView()
 </script>
 <style lang="scss" scoped>
 /*

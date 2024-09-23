@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {store} from "~/store";
 import {nextTick} from "vue";
+import {useRouter} from "vue-router";
 
 interface TagsView {
     tagsViewList: any[],
@@ -94,12 +95,13 @@ export const useTagsView = defineStore({
             })
         },
         updateTagsView() {
-            let hasAnalysis = this.getTagsViewList.find(tag => {
-                return tag.name === "Analysis"
-            })
+            const router = useRouter()
+            let hasAnalysis: boolean = this.tagsViewList.some(item => item.name === "Analysis")
+            console.log('hasAnalysis', hasAnalysis)
+            console.log(this.tagsViewList)
             if (!hasAnalysis) {
-                let matched = {fullPath: "/dashboard/analysis", meta: {title: "首页"}}
-                this.getTagsViewList.unshift(matched)
+                let matched = router.getRoutes().find(route => route.name === "Analysis")
+                this.tagsViewList.unshift(matched)
             }
         }
     },
